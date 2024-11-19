@@ -2,12 +2,13 @@
 function login() {
   const username = document.getElementById("username").value;
   const password = document.getElementById("password").value;
+  const passwordHash = crypto.SHA256(password).toString();
   fetch("https://kriptografi-server.vercel.app/login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ username, password }),
+    body: JSON.stringify({ username, passwordHash }),
   })
     .then((response) => response.json())
     .then((data) => {
@@ -26,12 +27,13 @@ function login() {
 function register() {
   const username = document.getElementById("registerUsername").value;
   const password = document.getElementById("registerPassword").value;
+  const passwordHash = crypto.SHA256(password).toString();
   fetch("https://kriptografi-server.vercel.app/register", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ username, password }),
+    body: JSON.stringify({ username, passwordHash }),
   })
     .then((response) => response.json())
     .then((data) => {
