@@ -108,3 +108,11 @@ p {
 .logout-container button:hover {
     background-color: #d32f2f;
 }
+
+.result {
+    word-wrap: break-word; 
+    white-space: pre-wrap; 
+    max-width: 100%; 
+    overflow-wrap: break-word; 
+  }
+  

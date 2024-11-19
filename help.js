@@ -196,7 +196,7 @@ function encryptText() {
   const text = document.getElementById("textInputEncrypt").value;
   const username_to = document.getElementById("usernameTo").value;
   const aesKey = document.getElementById("aesKeyInputEncrypt").value;
-  const shiftCaesar = parseInt(
+  let shiftCaesar = parseInt(
     document.getElementById("shiftCaesarInputEncrypt").value
   );
 
@@ -210,6 +210,11 @@ function encryptText() {
     alert("Shift Caesar tidak boleh kosong!");
     return;
   }
+
+    if (shiftCaesar >= 26) {
+      shiftCaesar = shiftCaesar % 26;
+      document.getElementById('shiftCaesarInputEncrypt').value = shiftCaesar;
+    }
 
   let textEncrypted = CryptoJS.AES.encrypt(text, aesKey).toString();
   textEncrypted = caesarCipher(textEncrypted, shiftCaesar);
@@ -261,7 +266,7 @@ function sendMessage(textEncrypted, username_to) {
 function decryptText() {
   const superEncrypted = document.getElementById("textInputDecrypt").value;
   const aesKey = document.getElementById("aesKeyInputDecrypt").value;
-  const shiftCaesar = parseInt(
+  let shiftCaesar = parseInt(
     document.getElementById("shiftCaesarInputDecrypt").value
   );
 
@@ -273,6 +278,11 @@ function decryptText() {
   if (!shiftCaesar && shiftCaesar !== 0) {
     alert("Shift Caesar tidak boleh kosong!");
     return;
+  }
+
+  if (shiftCaesar >= 26) {
+    shiftCaesar = shiftCaesar % 26;
+    document.getElementById('shiftCaesarInputEncrypt').value = shiftCaesar;
   }
 
   // Step 1: Reverse Caesar cipher
