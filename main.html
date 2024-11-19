@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplikasi Kriptografi</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Login Section -->
+    <div id="loginSection" class="container login-container">
+        <h2>Login</h2>
+        <input type="text" id="username" placeholder="Username">
+        <input type="password" id="password" placeholder="Password">
+        <button onclick="login()">Login</button>
+        <p>Belum punya akun? <a href="#" onclick="showRegisterForm()">Daftar</a></p>
+    </div>
+
+    <!-- Register Section -->
+    <div id="registerSection" class="container login-container hidden">
+        <h2>Daftar</h2>
+        <input type="text" id="registerUsername" placeholder="Username">
+        <input type="password" id="registerPassword" placeholder="Password">
+        <button onclick="register()">Daftar</button>
+        <p>Sudah punya akun? <a href="#" onclick="showLoginForm()">Login</a></p>
+    </div>
+
+    <!-- Main Application -->
+    <div id="mainApp" class="hidden">
+        <div class="logout-container">
+            <button onclick="logout()">Logout</button>
+        </div>
+        <div class="tab">
+            <button class="tablinks" onclick="openTab(event, 'TextEncryption')" id="defaultOpen">Enkripsi Text</button>
+            <button class="tablinks" onclick="openTab(event, 'ImageSteganography')">Steganografi Gambar</button>
+            <button class="tablinks" onclick="openTab(event, 'FileEncryption')">Enkripsi File</button>
+            <button class="tablinks" onclick="openTab(event, 'ReceiveMessage')">Terima Pesan</button>
+            <button class="tablinks" onclick="openTab(event, 'ReceiveHistory')">Riwayat</button>
+        </div>
+
+        <div id="TextEncryption" class="tabcontent">
+            <h2>Super Enkripsi (Modern + Klasik)</h2>
+        
+            <!-- Bagian Enkripsi -->
+            <div id="encryptionSection">
+                <h3>Enkripsi</h3>
+        
+                <!-- Input untuk Teks Pesan -->
+                <textarea id="textInputEncrypt" placeholder="Masukkan teks yang akan dienkripsi" rows="4"></textarea>
+        
+                <!-- Input untuk Username Tujuan -->
+                <input type="text" id="usernameTo" placeholder="Masukkan username tujuan">
+        
+                <!-- Input untuk Kunci AES -->
+                <input type="text" id="aesKeyInputEncrypt" placeholder="Masukkan kunci AES">
+        
+                <!-- Input untuk Shift Caesar -->
+                <input type="number" id="shiftCaesarInputEncrypt" placeholder="Masukkan shift Caesar">
+        
+                <!-- Tombol untuk Enkripsi dan Kirim -->
+                <button onclick="encryptText()">Enkripsi & Kirim</button>
+        
+                <!-- Hasil Enkripsi -->
+                <div id="encryptionResult" class="result"></div>
+            </div>
+        
+            <hr>
+        
+            <!-- Bagian Dekripsi -->
+            <div id="decryptionSection">
+                <h3>Dekripsi</h3>
+        
+                <!-- Input untuk Teks Terenkripsi -->
+                <textarea id="textInputDecrypt" placeholder="Masukkan teks terenkripsi untuk didekripsi" rows="4"></textarea>
+        
+                <!-- Input untuk Kunci AES -->
+                <input type="text" id="aesKeyInputDecrypt" placeholder="Masukkan kunci AES untuk dekripsi">
+        
+                <!-- Input untuk Shift Caesar -->
+                <input type="number" id="shiftCaesarInputDecrypt" placeholder="Masukkan shift Caesar untuk dekripsi">
+        
+                <!-- Tombol untuk Dekripsi -->
+                <button onclick="decryptText()">Dekripsi</button>
+        
+                <!-- Hasil Dekripsi -->
+                <div id="decryptionResult" class="result"></div>
+            </div>
+        </div>
+        
+        
+
+        <!-- Image Steganography Tab -->
+        <div id="ImageSteganography" class="tabcontent">
+            <h3>Steganografi Gambar</h3>
+            <div>
+                <label>Masukkan Pesan yang ingin disisipkan:</label>
+                <input type="text" id="hiddenMessage" placeholder="Masukkan pesan rahasia">
+            </div>
+            <div>
+                <label>Masukkan Gambar:</label>
+                <input type="file" id="imageLoader" accept="image/*">
+            </div>
+            <button onclick="encodeMessage()">Sisipkan Pesan</button>
+            <button onclick="downloadEncodedImage()">Unduh Gambar yang Disisipkan</button>
+            <canvas id="imageCanvas" style="display: none;"></canvas>
+            <div id="encodedImagePreview" style="margin-top: 20px;">
+                <!-- Preview of the encoded image will appear here -->
+            </div>
+            <hr>
+            <div>
+                <label>Masukkan Gambar untuk Mengekstrak Pesan:</label>
+                <input type="file" id="imageLoaderDecode" accept="image/*">
+            </div>
+            <button onclick="decodeMessage()">Ekstrak Pesan</button>
+            <div id="decodedMessage"></div>
+        </div>
+
+        <!-- File Encryption Tab -->
+        <div id="FileEncryption" class="tabcontent">
+            <h3>Enkripsi File</h3>
+            <input type="file" id="fileInput">
+            <button onclick="encryptFile()">Enkripsi File</button>
+            <button onclick="decryptFile()">Dekripsi File</button>
+            <div id="fileResult" class="result"></div>
+        </div>
+
+        <div id="ReceiveMessage" class="tabcontent">
+            <h2>Pesan Masuk</h2>
+            <table border="1" id="messagesTable">
+              <tbody id="messagesList">
+                <!-- Rows will be appended here -->
+              </tbody>
+            </table>
+        </div>
+
+        <div id="ReceiveHistory" class="tabcontent">
+            <h2>Riwayat Pesan</h2>
+            <table border="1" id="historyTable">
+              <tbody id="historyList">
+                <!-- Rows will be appended here -->
+              </tbody>
+            </table>
+        </div>
+          
+        
+    </div>
+    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js"></script>
+    <script src="index.js"></script>
+</body>
+</html>
