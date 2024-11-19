@@ -282,7 +282,7 @@ function decryptText() {
 
   if (shiftCaesar >= 26) {
     shiftCaesar = shiftCaesar % 26;
-    document.getElementById('shiftCaesarInputEncrypt').value = shiftCaesar;
+    document.getElementById('shiftCaesarInputDecrypt').value = shiftCaesar;
   }
 
   // Step 1: Reverse Caesar cipher
