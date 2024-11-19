@@ -1,3 +1,4 @@
+const crypto = require('crypto-js');
 // Login and Registration
 function login() {
   const username = document.getElementById("username").value;
